@@ -19,7 +19,6 @@ public class Appointment {
     }
 
     public void setDate(Date date) {
-        isValid(DateFormat.getDateInstance().format(date),10 );
         this.date = date;
     }
 
@@ -70,6 +69,11 @@ public class Appointment {
         fieldName = fieldName.replaceAll(" ", "");
 
         return fieldName;
+    }
+
+    private boolean dateChecked(){
+
+        return true;
     }
 
 }
