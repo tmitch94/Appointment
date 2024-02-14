@@ -1,4 +1,5 @@
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Locale;
 public class Appointment {
 
     String appointmentID;
-    Date date = new Date();
+    LocalDate date;
     Date dateChecker = new Date();
     String description;
     public String getAppointmentID() {
@@ -19,14 +20,18 @@ public class Appointment {
         this.appointmentID = appointmentID;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        isValid(date.toString(),10 );
-        DateFormat.getDateTimeInstance().format(date);
-        this.date = date;
+    public void setDate(LocalDate date) {
+        if (dateChecker(date)){
+            System.out.println("The date is in the past!");
+        }else{
+            isValid(String.valueOf(date),30);
+            this.date = date;
+        }
+
     }
 
     public String getDescription() {
@@ -37,7 +42,7 @@ public class Appointment {
         this.description = description;
     }
 
-    public Appointment(String appointmentID, Date date, String description) {
+    public Appointment(String appointmentID, LocalDate date, String description) {
         this.appointmentID = appointmentID;
         this.date = date;
         this.description = description;
@@ -57,9 +62,6 @@ public class Appointment {
         } else if (userInput.length() > allowedLength) {
             System.out.printf("Can only be %d characters or less\n", allowedLength);
             return false;
-        } else if (date.before(dateChecker)) {
-                System.out.println("Date is before this date, appointment not added");
-                return false;
         }
         return true;
     }
@@ -77,14 +79,12 @@ public class Appointment {
 
         return fieldName;
     }
-//    private boolean dateChecker(String userInput){
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-//
-//        try {
-//            Date userDate = simpleDateFormat.parse(userInput);
-//            Date
-//        }
-//    }
+    private boolean dateChecker(LocalDate date){
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+        LocalDate userDate = LocalDate.of(2024,2,01);
+
+        return date.isBefore(userDate);
+    }
 
 }
 

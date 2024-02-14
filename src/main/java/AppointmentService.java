@@ -12,16 +12,14 @@ public class AppointmentService {
             appointmentHashMap.put(appointment.getAppointmentID(),appointment);
     }
 
-
-
     public void deleteAppointment(String key){
         if (appointmentHashMap.containsKey(key)){
             appointmentHashMap.remove(key);
-            System.out.println( key + "Removed");
-            displayAppointments();
+            System.out.println( key + " Removed");
         }else {
             System.out.println("Not removed");
         }
+        displayAppointments();
     }
     private void displayAppointments(){
         for (Appointment appointments: appointmentHashMap.values()) {
