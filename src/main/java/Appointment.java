@@ -5,6 +5,11 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Appointment {
+
+    String appointmentID;
+    Date date = new Date();
+    Date dateChecker = new Date();
+    String description;
     public String getAppointmentID() {
         return appointmentID;
     }
@@ -19,7 +24,8 @@ public class Appointment {
     }
 
     public void setDate(Date date) {
-        isValid(DateFormat.getDateInstance().format(date),10 );
+        isValid(date.toString(),10 );
+        DateFormat.getDateTimeInstance().format(date);
         this.date = date;
     }
 
@@ -40,10 +46,7 @@ public class Appointment {
     public Appointment(){
 
     }
-    SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
-    String appointmentID;
-    Date date = new Date();
-    String description;
+
     
 
     public boolean isValid(String fieldName, int allowedLength) {
@@ -54,6 +57,9 @@ public class Appointment {
         } else if (userInput.length() > allowedLength) {
             System.out.printf("Can only be %d characters or less\n", allowedLength);
             return false;
+        } else if (date.before(dateChecker)) {
+                System.out.println("Date is before this date, appointment not added");
+                return false;
         }
         return true;
     }
@@ -71,6 +77,14 @@ public class Appointment {
 
         return fieldName;
     }
+//    private boolean dateChecker(String userInput){
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+//
+//        try {
+//            Date userDate = simpleDateFormat.parse(userInput);
+//            Date
+//        }
+//    }
 
 }
 

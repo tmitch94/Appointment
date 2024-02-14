@@ -25,7 +25,8 @@ public class AppointmentService {
     }
     private void displayAppointments(){
         for (Appointment appointments: appointmentHashMap.values()) {
-            System.out.println(appointments.getAppointmentID() + appointments.getDate() + appointments.getDescription());
+            System.out.println( "Appointment ID: "+ appointments.getAppointmentID() +"\nDate: " + appointments.getDate() +
+                    "\nDescription: "+ appointments.getDescription());
 
         }
     }
