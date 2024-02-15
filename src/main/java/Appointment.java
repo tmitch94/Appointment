@@ -9,7 +9,6 @@ public class Appointment {
 
     String appointmentID;
     LocalDate date;
-    Date dateChecker = new Date();
     String description;
     public String getAppointmentID() {
         return appointmentID;
@@ -39,6 +38,7 @@ public class Appointment {
     }
 
     public void setDescription(String description) {
+        isValid(description,50);
         this.description = description;
     }
 
