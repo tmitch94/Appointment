@@ -10,7 +10,8 @@ public class Contact {
     private String phoneNumber;
     private String address;
 
-    public Contact(String firstName, String lastName, String phoneNumber, String address) {
+    public Contact(String contactID,String firstName, String lastName, String phoneNumber, String address) {
+        this.contactID = contactID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -61,20 +62,16 @@ public class Contact {
     }
 
     public void setAddress(String address) {
-        isValid(phoneNumber,30);
+        isValid(address,30);
         this.address = address;
     }
 
     // Method to add contacts using a unique ID
-    public Contact creatingContact(Scanner sc) {
-
-        return this;
-    }
 
 
     public boolean isValid(String fieldName, int allowedLength) {
-        checkSpecialCharacters(fieldName);
-        if (fieldName.trim().isEmpty()) {
+        fieldName = checkSpecialCharacters(fieldName);
+        if (fieldName.trim().isBlank()) {
             System.out.println("Field can't be Empty!");
             return false;
         } else if (fieldName.length() > allowedLength) {
@@ -88,10 +85,11 @@ public class Contact {
         // Define the regex for special characters
         String regex = "[!@#$%^&*()\"{}_\\[\\]|\\?/<>,.-]";
         // Replace special characters with an empty string
-        fieldName = fieldName.replaceAll(regex, "");
-        // Replace spaces with an empty string
-        fieldName = fieldName.replaceAll(" ", "");
-
+        if (fieldName.trim().isBlank()){
+            fieldName = fieldName.replaceAll(" ", "");
+        }else {
+            fieldName = fieldName.replaceAll(regex, "");
+        }
         return fieldName;
     }
 
